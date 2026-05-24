@@ -47,6 +47,28 @@ The eval scores four dimensions per question: did at least one **expected docume
 
 ---
 
+## Demo screenshots
+
+### Multi-turn conversation (context + grounded follow-ups)
+
+![Multi-turn chat with citations](images/screenshot-1.png)
+
+Turn 1 (*"What is Tanger Med?"*) introduces the entity with a full grounded answer from the Group Brochure + Key Figures 2024 (95% confidence). Turn 2 (*"and what was its revenue in 2024?"*) resolves the pronoun silently and answers with a single sentence — **no re-introduction of the entity** — citing Key Figures 2024 p.2 directly. This is the multi-turn discipline enforced by the system prompt and the runtime follow-up nudge.
+
+### Cross-document synthesis (CIRES Technologies via the parent group's CSR report)
+
+![CIRES Technologies answer with clickable citations](images/screenshot-2.png)
+
+The corpus has no dedicated CIRES brochure, yet the system surfaces CIRES Technologies' services (electronic security, connectivity, cloud, cybersecurity, Digital Factory) by retrieving the relevant passages from the parent group's CSR report. Citations are clickable hyperlinks straight to the source PDF — the bottom of the screenshot shows the link target on hover.
+
+### Admin dashboard (audit trail + corpus stats)
+
+![Admin dashboard with conversation history and audit panel](images/screenshot-3.png)
+
+Stats bar: 63 conversations, 88% average confidence, 10 escalations, 184 corpus chunks across 8 documents. Conversation list with per-turn confidence and status badges. The right pane shows the same multi-turn conversation from screenshot 1, with the AI Decision audit panel collapsed per turn (expandable to reveal intent, search query, retrieved chunks with scores, and pipeline timings).
+
+---
+
 ## Architecture
 
 ```mermaid
