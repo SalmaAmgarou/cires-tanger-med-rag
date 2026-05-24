@@ -267,4 +267,4 @@ I chose **Option 2 — RAG** because it aligns directly with CIRES Technologies'
 
 The two companion docs — **[DESIGN.md](DESIGN.md)** and **[LIMITS.md](LIMITS.md)** — are written for a senior reviewer who wants to know not just what the system does but *why every choice was made* and *what would change at the next level of polish*.
 
-Happy to walk through any of the design choices live. — Hamza
+Happy to walk through any of the design choices live. — Salma
