@@ -27,6 +27,7 @@ from backend.ai.schemas import (
 )
 from backend.ai.understand import understand, update_state
 from backend.core.config import settings
+from backend.search.rerank import rerank_results
 from backend.search.weaviate_client import (
     SearchResult,
     format_results_for_prompt,
@@ -122,17 +123,37 @@ async def chat(
 
     # ── STEP 3: RETRIEVE ──
     if route_decision == "search" and search_query.strip():
+        # When reranking is enabled, over-retrieve so the reranker has more to chew on
+        retrieval_limit = (
+            settings.rerank_candidate_count
+            if settings.rerank_enabled
+            else settings.top_k_chunks
+        )
         search_results = await search_chunks(
             query=search_query,
-            limit=settings.top_k_chunks,
+            limit=retrieval_limit,
         )
+
+        # ── STEP 3b: RERANK (optional) ──
+        pre_rerank_snapshot = None
+        if settings.rerank_enabled and search_results:
+            pre_rerank_snapshot = [
+                {"title": r.document_title, "page": r.page_number, "score": round(r.score, 3)}
+                for r in search_results[:5]
+            ]
+            search_results = await rerank_results(
+                query=search_query,
+                results=search_results,
+                top_n=settings.top_k_chunks,
+            )
 
         audit_steps.append({
             "step": "search",
             "query": search_query,
             "results_count": len(search_results),
             "top_scores": [round(r.score, 3) for r in search_results[:3]],
-            "reranked": False,
+            "reranked": settings.rerank_enabled,
+            "pre_rerank": pre_rerank_snapshot,
         })
 
     # ── STEP 4: RESPOND ──

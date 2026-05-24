@@ -17,6 +17,10 @@ from backend.core.config import settings
 from backend.db.base import get_db
 from backend.db.models import AuditLog, Conversation, Message
 
+# NOTE: the `channel` field on ChatRequest is accepted but not currently
+# consumed — it's a hook for future multi-channel routing (WhatsApp /
+# email / Slack). Removing it would be a breaking API change.
+
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/chat", tags=["chat"])
@@ -67,6 +71,7 @@ class DebugPipelineStep(BaseModel):
     results_count: int | None = None
     top_scores: list[float] | None = None
     reranked: bool | None = None
+    pre_rerank: list[dict] | None = None
     confidence: float | None = None
     cited_chunk_ids: list[str] | None = None
     result: dict | None = None

@@ -1,5 +1,5 @@
 {
-  "description": "Public corpus of Tanger Med Group and CIRES Technologies documents used by the RAG demo.",
+  "description": "Public corpus of Tanger Med Group documents used by the RAG demo.",
   "documents": [
     {
       "source_url": "https://www.tangermedport.com/wp-content/uploads/2025/01/CP-TMPA-PORT-ACTIVITY-REPORT-IN-2024.pdf",
@@ -36,6 +36,42 @@
       "language": "en",
       "publish_date": "2025-09-01",
       "local_path": "tanger_med_csr_report_2024_en.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/documentations/2025/Brochure-du-Groupe-TM-Veng.pdf",
+      "title": "Tanger Med Group Brochure",
+      "document_type": "brochure",
+      "organization": "tanger_med",
+      "language": "en",
+      "publish_date": "2025-01-01",
+      "local_path": "tanger_med_group_brochure_en.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/2025/09/KF-VANG-USD.pdf",
+      "title": "Tanger Med Key Figures 2024",
+      "document_type": "fact_sheet",
+      "organization": "tanger_med",
+      "language": "en",
+      "publish_date": "2025-09-01",
+      "local_path": "tanger_med_key_figures_2024_en.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/documentations/2025/Finance-Com-T4-2024.pdf",
+      "title": "Tanger Med Financial Communication T4 2024",
+      "document_type": "financial_report",
+      "organization": "tanger_med",
+      "language": "en",
+      "publish_date": "2025-02-01",
+      "local_path": "tanger_med_finance_T4_2024_en.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/documentations/2026/Communication-financiere-S2-2025.pdf",
+      "title": "Tanger Med Communication financière S2 2025",
+      "document_type": "financial_report",
+      "organization": "tanger_med",
+      "language": "fr",
+      "publish_date": "2026-02-01",
+      "local_path": "tanger_med_finance_S2_2025_fr.pdf"
     }
   ]
 }

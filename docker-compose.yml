@@ -6,6 +6,9 @@ services:
     ports:
       - "8000:8000"
     env_file: .env
+    environment:
+      DATABASE_URL_SYNC: "host=postgres port=5432 dbname=rag user=rag password=rag_dev_password"
+      WEAVIATE_URL_HOST: "http://weaviate:8080"
     volumes:
       - ./backend:/app/backend
       - ./corpus:/app/corpus

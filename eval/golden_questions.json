@@ -1,0 +1,103 @@
+{
+  "description": "Golden test set for the Tanger Med / CIRES RAG demo. Each entry pairs a question with the document(s) we expect the system to cite and a list of keywords that should appear in the reply. A few groundedness probes test honest 'I don't know' behavior on out-of-corpus questions.",
+  "questions": [
+    {
+      "id": "throughput-2024-en",
+      "question": "What was Tanger Med's container throughput in 2024?",
+      "language": "en",
+      "expected_doc_title_contains": ["Port Activity Report"],
+      "expected_reply_contains": ["10,241,392", "18.8", "2024"],
+      "expected_confidence_min": 0.7
+    },
+    {
+      "id": "revenue-2024-en",
+      "question": "What was Tanger Med Group's consolidated turnover in 2024?",
+      "language": "en",
+      "expected_doc_title_contains": ["Key Figures", "Group Brochure", "Financial Communication"],
+      "expected_reply_contains": ["1.135", "billion", "2024"],
+      "expected_confidence_min": 0.6
+    },
+    {
+      "id": "csr-2024-en",
+      "question": "What did Tanger Med commit to for CSR in 2024?",
+      "language": "en",
+      "expected_doc_title_contains": ["CSR"],
+      "expected_reply_contains": ["2024"],
+      "expected_confidence_min": 0.6
+    },
+    {
+      "id": "ghg-2024-en",
+      "question": "What were the GHG emissions of Tanger Med Port in 2024?",
+      "language": "en",
+      "expected_doc_title_contains": ["CSR"],
+      "expected_reply_contains": ["242", "CO2"],
+      "expected_confidence_min": 0.6
+    },
+    {
+      "id": "cires-services-en",
+      "question": "What services does CIRES Technologies offer?",
+      "language": "en",
+      "expected_doc_title_contains": ["CSR", "Brochure"],
+      "expected_reply_contains": ["CIRES"],
+      "expected_confidence_min": 0.5
+    },
+    {
+      "id": "growth-comparison-en",
+      "question": "How did 2024 container throughput compare to 2023?",
+      "language": "en",
+      "expected_doc_title_contains": ["Port Activity Report"],
+      "expected_reply_contains": ["18.8", "2023", "2024"],
+      "expected_confidence_min": 0.7
+    },
+    {
+      "id": "rse-engagements-fr",
+      "question": "Quels engagements RSE Tanger Med a-t-il pris en 2024 ?",
+      "language": "fr",
+      "expected_doc_title_contains": ["CSR", "financier"],
+      "expected_reply_contains": ["2024"],
+      "expected_confidence_min": 0.5
+    },
+    {
+      "id": "trafic-conteneurs-fr",
+      "question": "Quel a été le trafic conteneurs du port de Tanger Med en 2024 ?",
+      "language": "fr",
+      "expected_doc_title_contains": ["Port Activity", "financier"],
+      "expected_reply_contains": ["2024"],
+      "expected_confidence_min": 0.6
+    },
+    {
+      "id": "chiffre-affaires-fr",
+      "question": "Quel a été le chiffre d'affaires consolidé de Tanger Med en 2024 ?",
+      "language": "fr",
+      "expected_doc_title_contains": ["financier", "Key Figures", "Communication financière"],
+      "expected_reply_contains": ["2024"],
+      "expected_confidence_min": 0.5
+    },
+    {
+      "id": "tanger-med-overview-en",
+      "question": "What is Tanger Med?",
+      "language": "en",
+      "expected_doc_title_contains": ["Brochure", "CSR", "Port Activity"],
+      "expected_reply_contains": ["port", "Tanger Med"],
+      "expected_confidence_min": 0.5
+    },
+    {
+      "id": "groundedness-ceo",
+      "question": "Who is the CEO of CIRES Technologies?",
+      "language": "en",
+      "expected_doc_title_contains": [],
+      "expected_reply_contains": ["couldn't find", "don't have", "I couldn't", "not", "available documents"],
+      "expected_confidence_max": 0.35,
+      "is_groundedness_test": true
+    },
+    {
+      "id": "groundedness-stock-price",
+      "question": "What is the current stock price of Tanger Med?",
+      "language": "en",
+      "expected_doc_title_contains": [],
+      "expected_reply_contains": ["couldn't find", "don't have", "not", "available", "documents"],
+      "expected_confidence_max": 0.4,
+      "is_groundedness_test": true
+    }
+  ]
+}

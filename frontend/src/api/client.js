@@ -41,6 +41,36 @@ export function getDocuments() {
   return request('/api/admin/documents');
 }
 
+export async function uploadDocument({ file, title, documentType, organization, language }) {
+  const form = new FormData();
+  form.append('file', file);
+  if (title) form.append('title', title);
+  if (documentType) form.append('document_type', documentType);
+  if (organization) form.append('organization', organization);
+  if (language) form.append('language', language);
+
+  const res = await fetch(`${API_BASE}/api/admin/documents/upload`, {
+    method: 'POST',
+    body: form,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.detail || `Upload failed (${res.status})`);
+  }
+  return res.json();
+}
+
+export async function deleteDocument(docId) {
+  const res = await fetch(`${API_BASE}/api/admin/documents/${docId}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.detail || `Delete failed (${res.status})`);
+  }
+  return res.json();
+}
+
 export function updateEscalationStatus(conversationId, status) {
   return request(
     `/api/admin/escalations/${conversationId}/status?status=${status}`,

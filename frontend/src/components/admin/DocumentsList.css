@@ -77,3 +77,122 @@
   font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
   font-size: 12px;
 }
+
+/* Upload form */
+.docs-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.docs-upload {
+  background: var(--admin-card-bg);
+  border-radius: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--admin-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.docs-upload-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.docs-upload-file {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--admin-bg);
+  border: 1px dashed var(--admin-border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  min-width: 200px;
+  color: var(--admin-text);
+}
+
+.docs-upload-file input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.docs-upload-input {
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  border-radius: 6px;
+  min-width: 130px;
+  font-family: inherit;
+}
+
+.docs-upload-btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: var(--admin-primary, #0f4c8c);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.docs-upload-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.docs-upload-btn:not(:disabled):hover {
+  opacity: 0.85;
+}
+
+.docs-upload-status {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.docs-upload-status--pending {
+  background: rgba(15, 76, 140, 0.08);
+  color: var(--admin-primary, #0f4c8c);
+}
+
+.docs-upload-status--success {
+  background: rgba(27, 135, 59, 0.10);
+  color: #1b873b;
+}
+
+.docs-upload-status--error {
+  background: rgba(177, 51, 26, 0.10);
+  color: #b1331a;
+}
+
+.docs-delete {
+  background: transparent;
+  color: var(--admin-text-muted);
+  border: 1px solid var(--admin-border);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.docs-delete:hover:not(:disabled) {
+  color: #b1331a;
+  border-color: #b1331a;
+}
+
+.docs-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

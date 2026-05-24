@@ -200,7 +200,7 @@ function AdminPage({ theme, toggleTheme }) {
             />
           )}
           {tab === 'documents' && (
-            <DocumentsList documents={documents} loading={loading} />
+            <DocumentsList documents={documents} loading={loading} onChange={fetchAll} />
           )}
         </div>
       </main>

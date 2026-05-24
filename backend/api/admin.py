@@ -1,13 +1,17 @@
-"""Admin API — conversation browser, audit trail, escalation queue, corpus stats."""
+"""Admin API — conversation browser, audit trail, escalation queue, corpus stats, live upload."""
 
 from __future__ import annotations
 
+import asyncio
 import csv
 import io
 import json
+import re
+import time
 from datetime import date, timedelta
+from pathlib import Path
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Query, UploadFile
 from fastapi.responses import StreamingResponse
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -16,6 +20,9 @@ from backend.db.base import get_db
 from backend.db.models import AuditLog, Chunk, Conversation, Document, Message
 
 router = APIRouter(prefix="/admin", tags=["admin"])
+
+UPLOAD_DIR = Path("/app/corpus/pdfs/uploads")
+_FILENAME_SAFE_RE = re.compile(r"[^A-Za-z0-9._-]+")
 
 
 @router.get("/stats")
@@ -220,6 +227,145 @@ async def get_conversation_audit(conversation_id: str, db: AsyncSession = Depend
         }
         for a in audits
     ]
+
+
+@router.post("/documents/upload")
+async def upload_document(
+    file: UploadFile = File(..., description="A PDF file to ingest into the corpus"),
+    title: str | None = Form(None, description="Optional document title; defaults to filename"),
+    document_type: str = Form("uploaded"),
+    organization: str = Form("user_uploaded"),
+    language: str | None = Form(None, description="'fr' or 'en'; auto-detected if omitted"),
+    publish_date: str | None = Form(None),
+):
+    """Upload a single PDF and ingest it into the corpus on the fly.
+
+    Returns the freshly created document id, page count and chunk count so the
+    UI can show feedback. Runs the sync ingest pipeline in a worker thread to
+    avoid blocking the asyncio event loop.
+    """
+    if not file.filename or not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only .pdf files are supported")
+
+    safe_name = _FILENAME_SAFE_RE.sub("_", file.filename)
+    pdf_path = UPLOAD_DIR / safe_name
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
+    contents = await file.read()
+    if not contents:
+        raise HTTPException(status_code=400, detail="Empty file")
+    if len(contents) > 50 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File exceeds 50 MB upload limit")
+
+    pdf_path.write_bytes(contents)
+
+    doc_meta = {
+        "source_url": f"upload://{safe_name}",
+        "title": title or file.filename,
+        "document_type": document_type,
+        "organization": organization,
+        "language": language,
+        "publish_date": publish_date,
+    }
+
+    started = time.time()
+
+    def _run_ingest() -> dict:
+        # Lazy imports to keep the request-handler cold path light
+        import httpx
+        import openai
+        import psycopg2
+
+        from backend.documents.ingest import (
+            PG_DSN,
+            WEAVIATE_URL,
+            create_pg_tables,
+            ingest_pdf,
+        )
+
+        conn = psycopg2.connect(PG_DSN)
+        weaviate_client = httpx.Client(timeout=60)
+        try:
+            create_pg_tables(conn)
+            oai = openai.OpenAI()
+            ingest_pdf(conn, weaviate_client, oai, pdf_path, doc_meta)
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT id, total_pages,
+                           (SELECT COUNT(*) FROM chunks WHERE document_id = documents.id)
+                    FROM documents WHERE source_url = %s
+                    """,
+                    (doc_meta["source_url"],),
+                )
+                row = cur.fetchone()
+            return {
+                "document_id": str(row[0]) if row else None,
+                "total_pages": row[1] if row else 0,
+                "chunk_count": row[2] if row else 0,
+            }
+        finally:
+            weaviate_client.close()
+            conn.close()
+
+    try:
+        result = await asyncio.to_thread(_run_ingest)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ingestion failed: {e}") from e
+
+    return {
+        "ok": True,
+        "title": doc_meta["title"],
+        "filename": safe_name,
+        "language": doc_meta.get("language"),
+        "duration_ms": int((time.time() - started) * 1000),
+        **result,
+    }
+
+
+@router.delete("/documents/{document_id}")
+async def delete_document(document_id: str, db: AsyncSession = Depends(get_db)):
+    """Delete a document (cascades to its chunks) from PostgreSQL and Weaviate."""
+    import uuid
+    try:
+        doc_uuid = uuid.UUID(document_id)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Invalid document ID")
+
+    doc = (await db.execute(
+        select(Document).where(Document.id == doc_uuid)
+    )).scalar_one_or_none()
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    await db.delete(doc)
+    await db.commit()
+
+    # Also delete the chunks from Weaviate by document_id
+    def _purge_weaviate():
+        import httpx
+        from backend.core.config import settings as cfg
+        with httpx.Client(timeout=30) as client:
+            client.delete(
+                f"{cfg.weaviate_url}/v1/batch/objects",
+                json={
+                    "match": {
+                        "class": "Chunks",
+                        "where": {
+                            "path": ["document_id"],
+                            "operator": "Equal",
+                            "valueText": document_id,
+                        },
+                    }
+                },
+            )
+
+    try:
+        await asyncio.to_thread(_purge_weaviate)
+    except Exception:
+        pass  # best-effort
+
+    return {"ok": True, "document_id": document_id}
 
 
 @router.get("/escalations")
