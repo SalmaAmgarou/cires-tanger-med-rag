@@ -49,23 +49,35 @@ The eval scores four dimensions per question: did at least one **expected docume
 
 ## Demo screenshots
 
-### Multi-turn conversation (context + grounded follow-ups)
+### A real 5-turn conversation (context, citations, follow-up discipline)
 
-![Multi-turn chat with citations](images/screenshot-1.png)
+| | |
+| --- | --- |
+| ![Multi-turn conversation part 1](images/01-multi-turn-part1.png) | ![Multi-turn conversation part 2](images/02-multi-turn-part2.png) |
 
-Turn 1 (*"What is Tanger Med?"*) introduces the entity with a full grounded answer from the Group Brochure + Key Figures 2024 (95% confidence). Turn 2 (*"and what was its revenue in 2024?"*) resolves the pronoun silently and answers with a single sentence — **no re-introduction of the entity** — citing Key Figures 2024 p.2 directly. This is the multi-turn discipline enforced by the system prompt and the runtime follow-up nudge.
+The same conversation, scrolled. Five user turns: *"What is Tanger Med?"* → *"How many containers did they handle in 2024?"* → *"And how does that compare to 2023?"* → *"What about their revenue?"* → *"And what does their tech subsidiary CIRES do?"*
 
-### Cross-document synthesis (CIRES Technologies via the parent group's CSR report)
+What this demonstrates:
 
-![CIRES Technologies answer with clickable citations](images/screenshot-2.png)
+- **Turn 1** (full intro): 99% confidence, 2 citations across the Group Brochure and Key Figures 2024.
+- **Turn 2** ("they handle"): pronoun resolved silently. One-sentence answer with the exact figure (10,241,392 containers, +18.8%), cited to the Port Activity Report 2024 p.1. **No re-introduction** of the entity.
+- **Turn 3** ("And how does that compare to 2023?"): retrieves 2023's 8.6M figure from a *different document* (Group Brochure p.6) and frames the comparison properly. 100% confidence.
+- **Turn 4** ("What about their revenue?"): topic switch with pronoun. Direct revenue answer (1.135 billion USD) plus the related activity-zone business volume — both cited.
+- **Turn 5** ("And what does their tech subsidiary CIRES do?"): lateral move to CIRES. The corpus contains no dedicated CIRES brochure, but the system surfaces CIRES's services + Digital Factory by retrieving passages from the parent group's CSR report.
 
-The corpus has no dedicated CIRES brochure, yet the system surfaces CIRES Technologies' services (electronic security, connectivity, cloud, cybersecurity, Digital Factory) by retrieving the relevant passages from the parent group's CSR report. Citations are clickable hyperlinks straight to the source PDF — the bottom of the screenshot shows the link target on hover.
+This is the multi-turn discipline enforced by the system prompt and the runtime follow-up nudge in `agent.py`.
+
+### Clickable citations open the source PDF directly
+
+![CIRES Technologies answer with URL hover preview](images/03-cires-citation-hover.png)
+
+Citation chips are real `<a>` tags. The bottom of the screenshot shows the browser's URL preview on hover — `https://www.tangermed.ma/wp-content/uploads/2025/09/CSR-Report-2024.pdf`. A reviewer can click through to verify any cited fact against the original PDF page.
 
 ### Admin dashboard (audit trail + corpus stats)
 
-![Admin dashboard with conversation history and audit panel](images/screenshot-3.png)
+![Admin dashboard with conversation history and audit panel](images/04-admin-dashboard.png)
 
-Stats bar: 63 conversations, 88% average confidence, 10 escalations, 184 corpus chunks across 8 documents. Conversation list with per-turn confidence and status badges. The right pane shows the same multi-turn conversation from screenshot 1, with the AI Decision audit panel collapsed per turn (expandable to reveal intent, search query, retrieved chunks with scores, and pipeline timings).
+Stats bar: 63 conversations, 88% average confidence, 10 escalations, 184 corpus chunks across 8 documents. Conversation list on the left with per-turn confidence and status badges (`active` / `escalated`). Right pane is a full conversation view with **per-turn audit chips** — intent classification (`question`, `follow_up`), detected language, and step latency (8358ms for the first turn's understand-step include + 3783ms for the follow-up). Each "▶ AI Decision" row expands to reveal the search query, retrieved chunks with relevance scores, and pipeline reasoning.
 
 ---
 
