@@ -98,10 +98,10 @@ async def chat(
     # ── STEP 1: UNDERSTAND ──
     understood, understand_ms = await understand(user_message, state, recent_messages)
 
-    # Preserve established conversation language after the first turn
-    if recent_messages:
-        understood.language = state.language or understood.language
-
+    # Trust the per-turn language detection — users legitimately switch
+    # languages mid-conversation (FR <-> EN is common with Tanger Med staff
+    # and stakeholders). The previous "lock to first-turn language" rule
+    # was too aggressive and produced English replies to French questions.
     state = update_state(state, understood)
 
     audit_steps.append({

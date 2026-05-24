@@ -5,11 +5,11 @@
     "pass_rate": 1.0,
     "retrieval_hit_rate": 1.0,
     "avg_keyword_recall": 0.983,
-    "avg_confidence": 0.766,
-    "avg_duration_ms": 5263,
+    "avg_confidence": 0.746,
+    "avg_duration_ms": 4749,
     "groundedness_tests": 2,
     "groundedness_correct": 2,
-    "wall_clock_seconds": 63.3
+    "wall_clock_seconds": 57.2
   },
   "results": [
     {
@@ -25,7 +25,7 @@
         "2024"
       ],
       "missing_keywords": [],
-      "confidence": 0.85,
+      "confidence": 1.0,
       "confidence_ok": true,
       "groundedness_ok": null,
       "citations_count": 2,
@@ -33,7 +33,7 @@
         "Tanger Med Port Authority - Rapport financier 2024",
         "Tanger Med Port Activity Report - 2024"
       ],
-      "duration_ms": 3667,
+      "duration_ms": 8282,
       "reply": "Tanger Med handled 10,241,392 containers in 2024, marking an 18.8% increase compared to 2023 [#1][#3].",
       "pass": true
     },
@@ -54,13 +54,12 @@
       "confidence": 0.85,
       "confidence_ok": true,
       "groundedness_ok": null,
-      "citations_count": 2,
+      "citations_count": 1,
       "cited_documents": [
-        "Live Upload Test",
         "Tanger Med Key Figures 2024"
       ],
-      "duration_ms": 4088,
-      "reply": "Tanger Med Group's consolidated turnover in 2024 was 1.135 billion USD [#1][#2].",
+      "duration_ms": 3373,
+      "reply": "Tanger Med Group's consolidated turnover in 2024 was 1.135 billion USD [#1].",
       "pass": true
     },
     {
@@ -74,15 +73,15 @@
         "2024"
       ],
       "missing_keywords": [],
-      "confidence": 0.95,
+      "confidence": 0.85,
       "confidence_ok": true,
       "groundedness_ok": null,
-      "citations_count": 3,
+      "citations_count": 4,
       "cited_documents": [
         "Tanger Med CSR Report 2024"
       ],
-      "duration_ms": 14122,
-      "reply": "In 2024, Tanger Med committed to several Corporate Social Responsibility (CSR) initiatives focusing on environmental protection, sustainable procurement, and social dialogue. The group emphasized protecting biodiversity and the marine environment by integrating sustainable practices into all its activities. This included organizing simulation exercises to combat marine pollution, involving various equipment and teams, and collaborating with experts from the French Center for Documentation, Research, and Experimentation on Accidental Water Pollution [#1].\n\nTanger Med also committed to sustainable procurement by building ethical and sustainable commercial relationships with its suppliers. This was formalized in their Sustainable Procurement Policy, which aims to minimize environmental and societal impacts and ensure responsible consumption [#2]. Additionally, the group focused on establishing a constructive social dialogue, promoting a work environment conducive to individual and collective development [#4].",
+      "duration_ms": 4086,
+      "reply": "In 2024, Tanger Med committed to several key Corporate Social Responsibility (CSR) initiatives. These include protecting biodiversity and the marine environment by integrating sustainable practices into all activities and raising awareness among stakeholders about the importance of protecting marine ecosystems [#1]. Additionally, Tanger Med organized simulation exercises to combat marine pollution, involving various teams and experts to test and inspect pollution control equipment [#1].\n\nThe group also emphasized sustainable procurement by building ethical and sustainable commercial relationships with suppliers, ensuring responsible sourcing, and minimizing environmental and societal impacts [#2]. Furthermore, Tanger Med focused on establishing a constructive social dialogue, promoting transparent communication, and fostering a work environment conducive to individual and collective development [#4].\n\nTheir CSR governance involves a top-down and bottom-up management model, ensuring a coherent expression of CSR projects and rigorous monitoring of sustainability commitments [#5].",
       "pass": true
     },
     {
@@ -104,8 +103,8 @@
       "cited_documents": [
         "Tanger Med CSR Report 2024"
       ],
-      "duration_ms": 4123,
-      "reply": "The GHG emissions of Tanger Med Port in 2024 were 242,279,917 kg CO2. This was based on an annual activity of 141,266,773 tons of cargo and 10,241,392 TEUs containers handled during the same fiscal year, equating to an average emission of 1.72 kg CO2 per ton [#1].",
+      "duration_ms": 6896,
+      "reply": "The GHG emissions for Tanger Med Port in 2024 were 242,279,917 kg CO2. This was based on an annual activity of 141,266,773 tons of cargo and 10,241,392 TEUs containers handled during the year. The average emission was calculated to be 1.72 kg CO2 per ton of goods handled [#1].",
       "pass": true
     },
     {
@@ -126,8 +125,8 @@
       "cited_documents": [
         "Tanger Med CSR Report 2024"
       ],
-      "duration_ms": 3642,
-      "reply": "CIRES Technologies offers a range of services including electronic security, connectivity, cloud services, and cybersecurity. These services are tailored for complex sites such as ports, airports, and logistics infrastructures [#2]. Additionally, CIRES Technologies operates a Digital Factory that focuses on developing innovative solutions for intelligent and adaptive management of infrastructure and systems [#1].",
+      "duration_ms": 3631,
+      "reply": "CIRES Technologies offers a range of services focused on electronic security, connectivity, cloud services, and cybersecurity. These services are tailored for complex sites such as ports, airports, and logistics infrastructures [#3]. Additionally, CIRES Technologies has developed a Digital Factory to provide advanced solutions that address the business needs of its customers and partners through innovation. This includes smart solutions for intelligent and adaptive management of infrastructure and systems [#2].",
       "pass": true
     },
     {
@@ -148,11 +147,11 @@
       "groundedness_ok": null,
       "citations_count": 2,
       "cited_documents": [
-        "Live Upload Test",
+        "Tanger Med Key Figures 2024",
         "Tanger Med Port Activity Report - 2024"
       ],
-      "duration_ms": 3885,
-      "reply": "In 2024, Tanger Med handled 10,241,392 containers, which represents an 18.8% increase compared to 2023 [#3][#4].",
+      "duration_ms": 3365,
+      "reply": "In 2024, Tanger Med handled 10,241,392 containers, which represents an 18.8% increase compared to 2023 [#2][#3]. This growth was supported by enhancements in port facilities and operations, leading to improved productivity and reduced waiting times for ships [#2].",
       "pass": true
     },
     {
@@ -169,13 +168,13 @@
       "confidence": 0.85,
       "confidence_ok": true,
       "groundedness_ok": null,
-      "citations_count": 3,
+      "citations_count": 4,
       "cited_documents": [
-        "Tanger Med CSR Report 2024",
-        "Tanger Med Group Brochure"
+        "Tanger Med Key Figures 2024",
+        "Tanger Med CSR Report 2024"
       ],
-      "duration_ms": 5059,
-      "reply": "En 2024, Tanger Med a pris plusieurs engagements en matière de responsabilité sociale des entreprises (RSE), notamment en se concentrant sur la protection de la biodiversité et de l'environnement marin. Le groupe a organisé des exercices de simulation pour lutter contre la pollution marine accidentelle, impliquant divers équipements et équipes, afin de sensibiliser et mobiliser les parties prenantes sur l'importance de protéger les écosystèmes marins [#3].\n\nTanger Med s'est également engagé à atteindre la neutralité carbone d'ici 2030, en intégrant pleinement les enjeux climatiques dans sa stratégie. Cela inclut la mise en œuvre d'initiatives concrètes pour réduire son empreinte environnementale et améliorer son efficacité énergétique, avec des actions structurées autour du changement climatique, de l'économie circulaire, de la biodiversité et de la mobilité verte [#4].\n\nEn termes de développement social, la Fondation Tanger Med a mené plus de 80 conventions en 2024, touchant 52 387 bénéficiaires dans le cadre de ses initiatives de développement régional [#5].",
+      "duration_ms": 4410,
+      "reply": "En 2024, Tanger Med a pris plusieurs engagements en matière de responsabilité sociétale des entreprises (RSE) axés sur l'environnement, le social et la gouvernance. Parmi les initiatives environnementales, le groupe a organisé des exercices de simulation pour lutter contre la pollution marine, impliquant divers équipements et équipes, afin de sensibiliser et mobiliser les parties prenantes sur l'importance de protéger les écosystèmes marins [#3].\n\nSur le plan social, Tanger Med a conclu plus de 80 conventions couvrant ses différentes lignes d'action, touchant 685 470 bénéficiaires depuis 2008 [#2]. De plus, le groupe a organisé des camps d'été pour les enfants des employés, offrant des activités récréatives et éducatives [#6].\n\nEnfin, Tanger Med s'est engagé à atteindre la neutralité carbone d'ici 2030, en intégrant pleinement les enjeux climatiques dans sa stratégie et en adoptant des alternatives durables autour de quatre axes : changement climatique, économie circulaire, biodiversité et mobilité verte [#4].",
       "pass": true
     },
     {
@@ -189,7 +188,7 @@
         "2024"
       ],
       "missing_keywords": [],
-      "confidence": 1.0,
+      "confidence": 0.95,
       "confidence_ok": true,
       "groundedness_ok": null,
       "citations_count": 2,
@@ -197,7 +196,7 @@
         "Tanger Med Port Authority - Rapport financier 2024",
         "Tanger Med Port Activity Report - 2024"
       ],
-      "duration_ms": 3527,
+      "duration_ms": 3657,
       "reply": "Le port de Tanger Med a traité 10 241 392 conteneurs en 2024, ce qui représente une augmentation de 18,8 % par rapport à 2023 [#1][#2].",
       "pass": true
     },
@@ -215,13 +214,12 @@
       "confidence": 0.85,
       "confidence_ok": true,
       "groundedness_ok": null,
-      "citations_count": 2,
+      "citations_count": 1,
       "cited_documents": [
-        "Live Upload Test",
         "Tanger Med Key Figures 2024"
       ],
-      "duration_ms": 3680,
-      "reply": "Le chiffre d'affaires consolidé de Tanger Med en 2024 était de 1 135 millions USD [#1][#2].",
+      "duration_ms": 3058,
+      "reply": "Le chiffre d'affaires consolidé de Tanger Med en 2024 était de 1,135 milliard USD [#1].",
       "pass": true
     },
     {
@@ -236,16 +234,16 @@
         "Tanger Med"
       ],
       "missing_keywords": [],
-      "confidence": 0.99,
+      "confidence": 0.95,
       "confidence_ok": true,
       "groundedness_ok": null,
       "citations_count": 2,
       "cited_documents": [
-        "Tanger Med Group Brochure",
-        "Tanger Med Key Figures 2024"
+        "Tanger Med Key Figures 2024",
+        "Tanger Med Group Brochure"
       ],
-      "duration_ms": 3875,
-      "reply": "Tanger Med Group is a developer and operator of ports, logistics, and industrial platforms. It manages the Tanger Med port complex, which is the leading port in both the Mediterranean and Africa, and serves as Morocco's primary import/export platform [#3][#4].\n\nThe Group also operates 25 container and bulk terminals through its subsidiary \"Marsa Maroc\" and handles a total volume of 187 million tons of goods and 11.44 million TEUs [#4]. Additionally, Tanger Med develops over 3,000 hectares of economic activity zones, hosting more than 1,400 companies across sectors such as automotive, aerospace, textiles, agribusiness, and logistics, generating a turnover of 17.22 billion USD in 2024 [#4].",
+      "duration_ms": 3559,
+      "reply": "Tanger Med Group is a developer and operator of ports, logistics, and industrial platforms. It manages the Tanger Med port complex, which is the leading port in the Mediterranean and Africa, and serves as Morocco's primary import/export platform. The group also operates 25 container and bulk terminals through \"Marsa Maroc\" and handles a total volume of 187 million tons of cargo and 11.44 million TEUs [#4][#5].",
       "pass": true
     },
     {
@@ -269,7 +267,7 @@
       "groundedness_ok": true,
       "citations_count": 0,
       "cited_documents": [],
-      "duration_ms": 6951,
+      "duration_ms": 6239,
       "reply": "I couldn't find specific information about the CEO of CIRES Technologies in the available documents. I can answer questions about Tanger Med's port activity, financial results, CSR commitments, or CIRES Technologies' services — would any of those help?",
       "pass": true
     },
@@ -289,13 +287,13 @@
       "missing_keywords": [
         "don't have"
       ],
-      "confidence": 0.2,
+      "confidence": 0.0,
       "confidence_ok": true,
       "groundedness_ok": true,
       "citations_count": 0,
       "cited_documents": [],
-      "duration_ms": 6542,
-      "reply": "I couldn't find specific information about the current stock price of Tanger Med in the available documents. Tanger Med Group is primarily a developer and operator of ports and logistics platforms, and it may not be publicly traded. If you have other questions about their operations or financial performance, I would be happy to help.",
+      "duration_ms": 6442,
+      "reply": "I couldn't find specific information about the current stock price of Tanger Med in the available documents. Tanger Med Group is not listed on the stock exchange, which might explain the absence of such information. If you have questions about their operations or financial performance, I can assist with that.",
       "pass": true
     }
   ]

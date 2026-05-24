@@ -342,30 +342,41 @@ async def delete_document(document_id: str, db: AsyncSession = Depends(get_db)):
     await db.commit()
 
     # Also delete the chunks from Weaviate by document_id
-    def _purge_weaviate():
+    def _purge_weaviate() -> int:
         import httpx
         from backend.core.config import settings as cfg
         with httpx.Client(timeout=30) as client:
-            client.delete(
-                f"{cfg.weaviate_url}/v1/batch/objects",
-                json={
-                    "match": {
-                        "class": "Chunks",
-                        "where": {
-                            "path": ["document_id"],
-                            "operator": "Equal",
-                            "valueText": document_id,
-                        },
-                    }
-                },
+            # Step 1: GraphQL to fetch matching chunk UUIDs (Weaviate's stable
+            # batch-delete REST API has been unreliable across minor versions, so
+            # we fetch IDs and delete one-by-one, which works everywhere).
+            gql = (
+                '{ Get { Chunks(where: {path: ["document_id"], operator: Equal, '
+                'valueText: "%s"}, limit: 1000) { _additional { id } } } }'
+            ) % document_id
+            resp = client.post(
+                f"{cfg.weaviate_url}/v1/graphql",
+                json={"query": gql},
             )
+            resp.raise_for_status()
+            chunks = (
+                resp.json().get("data", {}).get("Get", {}).get("Chunks", []) or []
+            )
+            deleted = 0
+            for c in chunks:
+                cid = (c.get("_additional") or {}).get("id")
+                if not cid:
+                    continue
+                r = client.delete(f"{cfg.weaviate_url}/v1/objects/Chunks/{cid}")
+                if r.status_code in (200, 204):
+                    deleted += 1
+            return deleted
 
     try:
-        await asyncio.to_thread(_purge_weaviate)
-    except Exception:
-        pass  # best-effort
+        purged = await asyncio.to_thread(_purge_weaviate)
+    except Exception as e:
+        return {"ok": True, "document_id": document_id, "weaviate_purge_error": str(e)}
 
-    return {"ok": True, "document_id": document_id}
+    return {"ok": True, "document_id": document_id, "chunks_purged_from_weaviate": purged}
 
 
 @router.get("/escalations")
