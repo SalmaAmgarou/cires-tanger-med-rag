@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
+# Environment
+.env
+*.env.local
+
+# Editors
+.idea/
+.vscode/
+
+# Frontend build
+node_modules/
+dist/
+build/
+
+# Local databases / artifacts
+*.db
+*.sqlite
+*.log
+
+# Corpus binaries (downloaded PDFs are not committed; manifest.json is)
+corpus/pdfs/
+
+# Claude harness
+.claude/
+
+# OS / misc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,266 @@
+.conv-detail {
+  background: var(--admin-card);
+  border-radius: 12px;
+  border: 1px solid var(--admin-border);
+  overflow-y: auto;
+  height: calc(100vh - 280px);
+  min-height: 400px;
+  transition: background-color 0.2s;
+}
+
+.conv-detail--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-text-muted);
+  font-size: 14px;
+}
+
+.conv-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--admin-border);
+  position: sticky;
+  top: 0;
+  background: var(--admin-card);
+  z-index: 5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.conv-detail-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--admin-text);
+}
+
+.conv-detail-status {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.conv-detail-status--active { background: var(--status-active-bg); color: var(--status-active-text); }
+.conv-detail-status--escalated { background: var(--status-escalated-bg); color: var(--status-escalated-text); }
+.conv-detail-status--closed { background: var(--status-closed-bg); color: var(--status-closed-text); }
+
+.conv-detail-messages { padding: 12px 20px; }
+
+.detail-msg {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--admin-border);
+}
+.detail-msg:last-child { border-bottom: none; }
+
+.detail-msg--user {
+  border-left: 3px solid var(--admin-primary);
+  padding-left: 12px;
+}
+.detail-msg--ai {
+  border-left: 3px solid var(--accent-blue);
+  padding-left: 12px;
+}
+
+.detail-msg-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.detail-msg-role {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--admin-text-muted);
+}
+.detail-msg-time {
+  font-size: 11px;
+  color: var(--admin-text-muted);
+}
+.detail-msg-text {
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  color: var(--admin-text);
+}
+
+.detail-msg-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.detail-confidence {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.detail-confidence--high { background: var(--conf-high-bg); color: var(--conf-high-text); }
+.detail-confidence--low { background: var(--status-escalated-bg); color: var(--status-escalated-text); }
+.detail-products { font-size: 11px; color: var(--admin-text-muted); }
+
+/* Conversation State Bar */
+.conv-state-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--admin-border);
+  background: var(--surface-subtle);
+}
+.state-tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: var(--accent-blue-bg);
+  color: var(--accent-blue);
+  font-weight: 500;
+}
+.state-tag--part {
+  background: var(--accent-pink-bg);
+  color: var(--accent-pink-text);
+}
+
+/* Confidence Badge */
+.conf-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.conf-badge--high { background: var(--conf-high-bg); color: var(--conf-high-text); }
+.conf-badge--medium { background: var(--conf-medium-bg); color: var(--conf-medium-text); }
+.conf-badge--low { background: var(--conf-low-bg); color: var(--conf-low-text); }
+
+/* Audit Panel */
+.audit-panel { margin-top: 8px; }
+.audit-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  background: var(--surface-subtle);
+  cursor: pointer;
+  font-size: 12px;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  color: var(--admin-text);
+  transition: background 0.1s;
+}
+.audit-toggle:hover { background: var(--surface-hover); }
+.audit-toggle-icon { font-size: 10px; color: var(--text-muted); }
+.audit-toggle-label { font-weight: 600; color: var(--text-primary); }
+.audit-intent-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--accent-indigo-bg);
+  color: var(--accent-indigo-text);
+  font-weight: 500;
+}
+.audit-duration {
+  font-size: 10px;
+  color: var(--admin-text-muted);
+  margin-left: auto;
+}
+.audit-detail {
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  background: var(--surface-subtle);
+}
+.audit-section { margin-bottom: 10px; }
+.audit-section:last-child { margin-bottom: 0; }
+.audit-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--admin-text-muted);
+  margin-bottom: 4px;
+}
+.audit-entities { display: flex; flex-wrap: wrap; gap: 8px; }
+.audit-entity { font-size: 12px; color: var(--text-primary); }
+.audit-parts { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.audit-part-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--accent-pink-bg);
+  color: var(--accent-pink-text);
+}
+.audit-query {
+  display: block;
+  font-size: 12px;
+  padding: 6px 10px;
+  background: var(--surface-code-bg);
+  color: var(--surface-code-text);
+  border-radius: 4px;
+  word-break: break-all;
+  font-family: monospace;
+}
+.audit-results { display: flex; flex-direction: column; gap: 4px; }
+.audit-result-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  padding: 4px 0;
+}
+.audit-result-score {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--conf-high-bg);
+  color: var(--conf-high-text);
+  font-weight: 600;
+  min-width: 36px;
+  text-align: center;
+}
+.audit-result-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+.audit-result-price {
+  font-weight: 600;
+  color: var(--accent-blue);
+  white-space: nowrap;
+}
+.audit-reasoning {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.4;
+}
+.audit-pipeline { display: flex; flex-wrap: wrap; gap: 6px; }
+.audit-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--accent-indigo-bg);
+  color: var(--accent-indigo-text);
+}
+.audit-step-model {
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--admin-border);
+  color: var(--accent-indigo-text);
+}
+.audit-step-ms {
+  font-size: 9px;
+  color: var(--text-muted);
+}

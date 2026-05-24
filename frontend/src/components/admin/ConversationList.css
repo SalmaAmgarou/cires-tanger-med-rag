@@ -1,0 +1,118 @@
+.conv-list {
+  background: var(--admin-card);
+  border-radius: 12px;
+  border: 1px solid var(--admin-border);
+  overflow-y: auto;
+  height: calc(100vh - 280px);
+  min-height: 400px;
+  transition: background-color 0.2s;
+}
+
+.conv-list-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--admin-text-muted);
+  font-size: 14px;
+}
+
+.conv-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.1s;
+  font-family: inherit;
+  color: var(--admin-text);
+  border-left: 3px solid transparent;
+}
+
+.conv-item:last-child {
+  border-bottom: none;
+}
+
+.conv-item:hover {
+  background: var(--surface-hover);
+}
+
+.conv-item--active {
+  background: var(--sidebar-active-bg);
+  border-left-color: var(--admin-primary);
+}
+
+.conv-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.conv-item-id {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--admin-text);
+}
+
+.conv-item-time {
+  font-size: 11px;
+  color: var(--admin-text-muted);
+}
+
+.conv-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conv-item-preview {
+  font-size: 13px;
+  color: var(--admin-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  margin-right: 8px;
+}
+
+.conv-item-status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.conv-item-status--active {
+  background: var(--status-active-bg);
+  color: var(--status-active-text);
+}
+
+.conv-item-status--escalated {
+  background: var(--status-escalated-bg);
+  color: var(--status-escalated-text);
+}
+
+.conv-item-status--closed {
+  background: var(--status-closed-bg);
+  color: var(--status-closed-text);
+}
+
+.conv-item-badges {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.conv-item-conf {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.conv-item-conf--high { background: var(--conf-high-bg); color: var(--conf-high-text); }
+.conv-item-conf--medium { background: var(--conf-medium-bg); color: var(--conf-medium-text); }
+.conv-item-conf--low { background: var(--conf-low-bg); color: var(--conf-low-text); }

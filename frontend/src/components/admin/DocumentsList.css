@@ -1,0 +1,79 @@
+.docs-list {
+  background: var(--admin-card-bg);
+  border-radius: 8px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.docs-header {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.docs-table thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--admin-text-muted);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--admin-border);
+  background: var(--admin-bg);
+}
+
+.docs-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--admin-border);
+  color: var(--admin-text);
+}
+
+.docs-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-table tbody tr:hover {
+  background: var(--admin-hover-bg);
+}
+
+.docs-title {
+  font-weight: 500;
+  max-width: 320px;
+}
+
+.docs-tag {
+  display: inline-block;
+  font-size: 11px;
+  background: var(--admin-bg);
+  color: var(--admin-text-muted);
+  border: 1px solid var(--admin-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+.docs-empty,
+.docs-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--admin-text-muted);
+}
+
+.docs-empty code {
+  background: var(--admin-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 12px;
+}

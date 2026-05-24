@@ -1,0 +1,185 @@
+/* Reset & base */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Light Theme (default) ── */
+:root {
+  /* Chat */
+  --wa-bg: #efeae2;
+  --wa-header: #00a884;
+  --wa-header-dark: #008069;
+  --wa-bubble-out: #d9fdd3;
+  --wa-bubble-in: #ffffff;
+  --wa-text: #111b21;
+  --wa-text-light: #667781;
+  --wa-input-bg: #ffffff;
+  --wa-panel-bg: #f0f2f5;
+  --wa-border: #e9edef;
+  --wa-check: #53bdeb;
+
+  /* Admin */
+  --admin-bg: #f8f9fa;
+  --admin-card: #ffffff;
+  --admin-primary: #00a884;
+  --admin-danger: #dc3545;
+  --admin-warning: #f59e0b;
+  --admin-text: #1e293b;
+  --admin-text-muted: #64748b;
+  --admin-border: #e2e8f0;
+  --admin-error-bg: #fef2f2;
+
+  /* Confidence */
+  --conf-high-bg: #dcfce7;
+  --conf-high-text: #166534;
+  --conf-medium-bg: #fef9c3;
+  --conf-medium-text: #a16207;
+  --conf-low-bg: #fee2e2;
+  --conf-low-text: #991b1b;
+
+  /* Status */
+  --status-active-bg: #dcfce7;
+  --status-active-text: #166534;
+  --status-escalated-bg: #ffedd5;
+  --status-escalated-text: #c2410c;
+  --status-closed-bg: #f1f5f9;
+  --status-closed-text: #64748b;
+
+  /* Accents */
+  --accent-blue: #2563eb;
+  --accent-blue-bg: #dbeafe;
+  --accent-indigo-bg: #e0e7ff;
+  --accent-indigo-text: #3730a3;
+  --accent-pink-bg: #fce7f3;
+  --accent-pink-text: #9d174d;
+
+  /* Surfaces & text */
+  --surface-subtle: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --surface-code-bg: #1e293b;
+  --surface-code-text: #86efac;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* Sidebar */
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #f1f5f9;
+  --sidebar-active-bg: rgba(0, 168, 132, 0.08);
+  --sidebar-active-border: #00a884;
+
+  /* Wallpaper pattern */
+  --wallpaper-opacity: 0.12;
+  --wallpaper-color: %23c8c3ba;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--wa-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  /* Chat */
+  --wa-bg: #0b141a;
+  --wa-header: #202c33;
+  --wa-header-dark: #111b21;
+  --wa-bubble-out: #005c4b;
+  --wa-bubble-in: #202c33;
+  --wa-text: #e9edef;
+  --wa-text-light: #8696a0;
+  --wa-input-bg: #2a3942;
+  --wa-panel-bg: #202c33;
+  --wa-border: #313d45;
+  --wa-check: #53bdeb;
+
+  /* Admin */
+  --admin-bg: #0f172a;
+  --admin-card: #1e293b;
+  --admin-primary: #34d399;
+  --admin-danger: #f87171;
+  --admin-warning: #fbbf24;
+  --admin-text: #e2e8f0;
+  --admin-text-muted: #94a3b8;
+  --admin-border: #334155;
+  --admin-error-bg: #451a1a;
+
+  /* Confidence */
+  --conf-high-bg: #064e3b;
+  --conf-high-text: #6ee7b7;
+  --conf-medium-bg: #713f12;
+  --conf-medium-text: #fcd34d;
+  --conf-low-bg: #7f1d1d;
+  --conf-low-text: #fca5a5;
+
+  /* Status */
+  --status-active-bg: #064e3b;
+  --status-active-text: #6ee7b7;
+  --status-escalated-bg: #7c2d12;
+  --status-escalated-text: #fdba74;
+  --status-closed-bg: #1e293b;
+  --status-closed-text: #94a3b8;
+
+  /* Accents */
+  --accent-blue: #60a5fa;
+  --accent-blue-bg: #1e3a5f;
+  --accent-indigo-bg: #312e81;
+  --accent-indigo-text: #a5b4fc;
+  --accent-pink-bg: #831843;
+  --accent-pink-text: #f9a8d4;
+
+  /* Surfaces & text */
+  --surface-subtle: #1e293b;
+  --surface-hover: #334155;
+  --surface-code-bg: #0f172a;
+  --surface-code-text: #86efac;
+  --text-primary: #e2e8f0;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+
+  /* Sidebar */
+  --sidebar-bg: #1e293b;
+  --sidebar-hover: #334155;
+  --sidebar-active-bg: rgba(52, 211, 153, 0.1);
+  --sidebar-active-border: #34d399;
+
+  /* Wallpaper pattern */
+  --wallpaper-opacity: 0.04;
+  --wallpaper-color: %23ffffff;
+
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--wa-bg);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--admin-primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wa-text-light);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

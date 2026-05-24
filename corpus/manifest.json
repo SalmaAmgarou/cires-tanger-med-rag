@@ -1,0 +1,41 @@
+{
+  "description": "Public corpus of Tanger Med Group and CIRES Technologies documents used by the RAG demo.",
+  "documents": [
+    {
+      "source_url": "https://www.tangermedport.com/wp-content/uploads/2025/01/CP-TMPA-PORT-ACTIVITY-REPORT-IN-2024.pdf",
+      "title": "Tanger Med Port Activity Report - 2024",
+      "document_type": "activity_report",
+      "organization": "tanger_med",
+      "language": "en",
+      "publish_date": "2025-01-22",
+      "local_path": "tanger_med_port_activity_2024_en.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/press-releases/2026/CP-TMPA-PORT-ACTIVITY-REPORT-IN-2025.pdf",
+      "title": "Tanger Med Port Activity Report - 2025",
+      "document_type": "activity_report",
+      "organization": "tanger_med",
+      "language": "en",
+      "publish_date": "2026-02-02",
+      "local_path": "tanger_med_port_activity_2025_en.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/documentations/2025/rapport-financier-2024-V-WEB.pdf",
+      "title": "Tanger Med Port Authority - Rapport financier 2024",
+      "document_type": "financial_report",
+      "organization": "tanger_med",
+      "language": "fr",
+      "publish_date": "2025-06-01",
+      "local_path": "tanger_med_rapport_financier_2024_fr.pdf"
+    },
+    {
+      "source_url": "https://www.tangermed.ma/wp-content/uploads/2025/09/CSR-Report-2024.pdf",
+      "title": "Tanger Med CSR Report 2024",
+      "document_type": "csr_report",
+      "organization": "tanger_med",
+      "language": "en",
+      "publish_date": "2025-09-01",
+      "local_path": "tanger_med_csr_report_2024_en.pdf"
+    }
+  ]
+}

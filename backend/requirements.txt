@@ -1,0 +1,41 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# Database
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+alembic==1.14.0
+
+# Redis
+redis[hiredis]==5.2.1
+
+# Weaviate
+weaviate-client==4.9.6
+
+# OpenAI
+openai==1.58.1
+
+# Settings & validation
+pydantic==2.10.3
+pydantic-settings==2.7.0
+
+# HTTP client (pinned for weaviate-client compat)
+httpx==0.27.0
+
+# HTML parsing
+beautifulsoup4==4.12.2
+lxml==5.1.0
+
+# PDF parsing
+pymupdf==1.24.13
+
+# Sync PG driver for ingestion scripts
+psycopg2-binary==2.9.10
+
+# Reranking
+cohere>=5.0,<6.0
+
+# Utilities
+python-dotenv==1.0.1
+python-multipart==0.0.20
