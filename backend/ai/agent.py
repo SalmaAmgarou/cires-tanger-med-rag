@@ -255,12 +255,31 @@ async def _generate_response(
     for msg in recent_messages[-settings.history_window_size:]:
         messages.append({"role": msg["role"], "content": msg["content"]})
 
+    is_follow_up_turn = any(m["role"] == "assistant" for m in recent_messages)
+
+    follow_up_warning = ""
+    if is_follow_up_turn:
+        last_ai = next(
+            (m["content"] for m in reversed(recent_messages) if m["role"] == "assistant"),
+            "",
+        )
+        follow_up_warning = (
+            "\n⚠️ FOLLOW-UP TURN — the user has already received an assistant reply in this conversation.\n"
+            "RULES (MANDATORY):\n"
+            "- Do NOT re-introduce or re-define Tanger Med, CIRES Technologies, or any entity already mentioned.\n"
+            "- Do NOT restate facts present in your previous reply (excerpt below).\n"
+            "- Lead the FIRST sentence with the NEW information being requested.\n"
+            "- Maximum length on follow-ups: 2 short paragraphs.\n"
+            f"\nYour previous assistant reply (do not repeat):\n\"{last_ai[:400]}\"\n"
+        )
+
     augmented = (
         f"User message: {user_message}\n\n"
         f"---\n"
         f"Intent: {understood.intent}\n"
         f"Route: {route_decision}\n"
         f"Language: {state.language}\n"
+        f"Turn type: {'follow-up (user has seen prior assistant reply)' if is_follow_up_turn else 'first turn'}\n"
         f"---\n\n"
         f"Retrieved context:\n{context_block}\n\n"
         f"---\n\n"
@@ -270,6 +289,7 @@ async def _generate_response(
         f"- If the context does not contain the answer, say so honestly and do NOT invent facts.\n"
         f'- Return JSON: {{"reply": "...", "confidence": 0.0-1.0, "reasoning": "...", "cited_chunk_ids": ["..."]}}.\n'
         f"- Populate `cited_chunk_ids` with the EXACT 'Chunk ID' values of chunks you actually used."
+        f"{follow_up_warning}"
     )
     messages.append({"role": "user", "content": augmented})
 
