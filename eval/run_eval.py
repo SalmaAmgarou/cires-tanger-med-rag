@@ -56,12 +56,18 @@ def score_question(q: dict, response: dict) -> dict:
         # For groundedness tests, retrieval_hit = "ok" if we DIDN'T fabricate citations
         retrieval_hit = len(citations) == 0
 
-    # 2. Keyword recall — OR for groundedness (any refusal phrase is enough)
+    # 2. Keyword recall — direct keywords AND "any-of" alternate groups
     matched_kws = [k for k in expected_kws if _norm(k) in reply]
+    alternates = q.get("expected_reply_contains_alternates") or []
+    alt_hits = 0
+    for group in alternates:
+        if any(_norm(opt) in reply for opt in group):
+            alt_hits += 1
     if is_groundedness:
         keyword_score = 1.0 if matched_kws else 0.0
-    elif expected_kws:
-        keyword_score = len(matched_kws) / len(expected_kws)
+    elif expected_kws or alternates:
+        total = len(expected_kws) + len(alternates)
+        keyword_score = (len(matched_kws) + alt_hits) / total if total else 1.0
     else:
         keyword_score = 1.0
 

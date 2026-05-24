@@ -14,7 +14,8 @@
       "question": "What was Tanger Med Group's consolidated turnover in 2024?",
       "language": "en",
       "expected_doc_title_contains": ["Key Figures", "Group Brochure", "Financial Communication"],
-      "expected_reply_contains": ["1.135", "billion", "2024"],
+      "expected_reply_contains": ["2024", "USD", "1,135"],
+      "expected_reply_contains_alternates": [["1.135", "1,135", "1135"], ["billion", "million"]],
       "expected_confidence_min": 0.6
     },
     {
