@@ -79,6 +79,34 @@ Citation chips are real `<a>` tags. The bottom of the screenshot shows the brows
 
 Stats bar: 63 conversations, 88% average confidence, 10 escalations, 184 corpus chunks across 8 documents. Conversation list on the left with per-turn confidence and status badges (`active` / `escalated`). Right pane is a full conversation view with **per-turn audit chips** — intent classification (`question`, `follow_up`), detected language, and step latency (8358ms for the first turn's understand-step include + 3783ms for the follow-up). Each "▶ AI Decision" row expands to reveal the search query, retrieved chunks with relevance scores, and pipeline reasoning.
 
+### The corpus is real, browsable, and accepts live uploads
+
+![Corpus tab with upload form and 8 indexed documents](images/05-corpus-tab-with-upload.png)
+
+The Corpus tab lists every ingested document with its type (`activity_report`, `financial_report`, `csr_report`, `brochure`, `fact_sheet`), language, page count, chunk count, publish date, and a `link` back to the source PDF. Each row has a Delete button that cleanly removes both the Postgres record and the corresponding Weaviate chunks.
+
+The **Upload & Index** form at the top accepts any PDF (file picker, optional title, organization tag, document type, language override) and runs the same `parse → chunk → embed → index` pipeline inline within the request — typically ~5-30 seconds depending on the PDF. Useful when a reviewer hands you a fresh document mid-conversation.
+
+### Honest refusal when the corpus can't answer
+
+![Honest refusal in the chat — Who is the CEO of CIRES Technologies](images/06-honest-refusal-chat.png)
+
+Question: *"Who is the CEO of CIRES Technologies?"* — a real factual question whose answer is **not** in any of the 8 ingested documents. The system replies with *"I couldn't find specific information about the CEO of CIRES Technologies in the available documents. I can answer questions about Tanger Med's port activity, financial results, CSR commitments, or CIRES Technologies' services — would any of those help?"*. Confidence is set to **0%** and the citation chip section is empty. No fabricated CEO name, no fabricated source.
+
+### The audit trail proves the refusal was principled, not lazy
+
+![Expanded AI Decision audit panel for the refused question](images/07-honest-refusal-audit-expanded.png)
+
+This is the *why* behind the previous screenshot. Expanding the "▼ AI Decision" panel on the same conversation reveals the full pipeline trace:
+
+- **Intent** classified as `question`, **language** as `EN`, end-to-end latency `12752ms`.
+- **Search query** rewrite landed on `CEO of CIRES Technologies` — exactly right.
+- **Top retrieved chunks (6)** with their relevance scores: `33%, 25%, 5%, 2%, 0%, 0%`. The search ran, returned candidates, but **none were relevant enough** to answer the question.
+- **Reasoning** captured by the generation step: *"The retrieved context does not contain any information about the CEO of CIRES Technologies. None of the chunks provide relevant details about the leadership or executive team..."*
+- **Pipeline** chips on the bottom show the model cascade and timing — `understand` (gpt-4o-mini, 5148ms) → `search` → `generate` (gpt-4o, 1416ms).
+
+This is the level of observability you'd want before deploying a RAG system in a regulated setting. Every refusal is auditable, every retrieval score is logged, every step's latency is traceable.
+
 ---
 
 ## Architecture
